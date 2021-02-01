@@ -1,10 +1,17 @@
 version: '3'
 services:
+  pyroscope:
+    image: "pyroscope/pyroscope:latest"
+    ports:
+      - "4040:4040"
+    command:
+      - "server"
   web:
     build:
       context: docker/web
       dockerfile: Dockerfile
     working_dir: /web
+    platform: linux/amd64
     volumes:
       - ./web:/web
       - /web/node_modules/
@@ -108,6 +115,7 @@ services:
 
   mysql:
     image: mysql:8
+    platform: linux/amd64
     env_file:
       - .env
     volumes:

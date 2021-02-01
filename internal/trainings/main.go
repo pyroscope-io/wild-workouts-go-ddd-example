@@ -9,9 +9,14 @@ import (
 	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/ports"
 	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainings/service"
 	"github.com/go-chi/chi"
+	"github.com/pyroscope-io/pyroscope/pkg/agent/profiler"
 )
 
 func main() {
+	profiler.Start(profiler.Config{
+		ApplicationName: "wild-workouts.trainings",
+		ServerAddress:   "http://pyroscope:4040",
+	})
 	logs.Init()
 
 	ctx := context.Background()

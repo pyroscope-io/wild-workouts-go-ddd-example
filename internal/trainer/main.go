@@ -13,10 +13,15 @@ import (
 	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/ports"
 	"github.com/ThreeDotsLabs/wild-workouts-go-ddd-example/internal/trainer/service"
 	"github.com/go-chi/chi"
+	"github.com/pyroscope-io/pyroscope/pkg/agent/profiler"
 	"google.golang.org/grpc"
 )
 
 func main() {
+	profiler.Start(profiler.Config{
+		ApplicationName: "wild-workouts.trainer",
+		ServerAddress:   "http://pyroscope:4040",
+	})
 	logs.Init()
 
 	ctx := context.Background()
